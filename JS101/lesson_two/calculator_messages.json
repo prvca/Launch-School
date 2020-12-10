@@ -1,0 +1,20 @@
+{
+  "en": {
+    "welcome" : "Welcome to Calculator!!!!",
+    "first_number" : "What's the first number?",
+    "second_number" : "What's the second number?",
+    "invalid_number" : "Hmmm... That doesn't look like a valid number.",
+    "choose_operator" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "invalid_operator" : "Must choose 1, 2, 3, or 4",
+    "keep_going" : "Would you like to perform another calculator?\n 1) Yes 2) No"
+  },
+  "es": {
+    "welcome" : "Bienvenido a la calculadora!",
+    "first_number" : "Entre su primero numero.",
+    "second_number" : "What's the second number?",
+    "invalid_number" : "Asegúrese de entrar un nombre válido.",
+    "choose_operator" : "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "invalid_operator" : "Must choose 1, 2, 3, or 4",
+    "keep_going" : "Would you like to perform another calculator?\n 1) Yes 2) No"
+  }
+}

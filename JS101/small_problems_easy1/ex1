@@ -1,0 +1,29 @@
+
+// Input:
+// Function takes one integer argument
+// Integer may be positive, negative, or 0
+
+// Output:
+// Function returns true if absolute value is odd
+// false if it is not odd
+
+// Implicit understanding:
+// Odd means, if operand is divided by 2, remainder will be 1
+
+
+function isOdd(number) {
+  if (number < 0) {
+    return ((0 - number) % 2 === 1);
+  } else if (number >= 0) {
+    return number % 2 === 1;
+  } else return
+}
+
+
+
+// solution
+/*
+function isOdd() {
+  return Math.abs(number) % 2 === 1;
+}
+*/
