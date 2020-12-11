@@ -3,7 +3,7 @@ const readline = require('readline-sync');
 function invalidNumber(number) {
   return number.trimStart() === '' ||
          Number.isNaN(Number(number)) ||
-         number <= 0;
+         Number(number) <= 0;
 }
 
 function monthlyPayment(loanAmount, apr, durationInYears) {
@@ -11,13 +11,13 @@ function monthlyPayment(loanAmount, apr, durationInYears) {
   let monthlyInterestRate = (apr / 100) / 12;
 
   let monthlyPayment = loanAmount *
-                      (monthlyInterestRate /
-                      (1 - Math.pow((1 + monthlyInterestRate),
-                      (-durationInMonths))));
+                       (monthlyInterestRate /
+                       (1 - Math.pow((1 + monthlyInterestRate),
+                         (-durationInMonths))));
   return (`\nYour monthly payment is $${monthlyPayment.toFixed(2)}`);
 }
 
-console.log('\nMortgage Calculator\n')
+console.log('\nWelcome to Mortgage Calculator!\n');
 
 console.log('Please enter your loan amount.');
 let amount = readline.question();
@@ -26,11 +26,11 @@ while (invalidNumber(amount)) {
   amount = readline.question();
 }
 
-console.log('\nPlease enter your APR percentage.');
-let aprPercentage = readline.question();
-while (invalidNumber(aprPercentage)) {
+console.log('\nPlease enter the interest rate.');
+let interestRate = readline.question();
+while (invalidNumber(interestRate)) {
   console.log("APR percentage must be a positive number.");
-  aprPercentage = readline.question();
+  interestRate = readline.question();
 }
 
 console.log('\nPlease enter your loan length in years.');
@@ -40,4 +40,4 @@ while (invalidNumber(loanLength)) {
   loanLength = readline.question();
 }
 
-console.log(monthlyPayment(amount, aprPercentage, loanLength));
+console.log(monthlyPayment(amount, interestRate, loanLength));

@@ -1,4 +1,5 @@
 const readline = require('readline-sync');
+const messages = require('./calculator_messages.json');
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -8,7 +9,7 @@ function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-prompt('Welcome to Calculator!');
+prompt(messages.welcome);
 
 prompt("What's the first number?");
 let number1 = readline.question();
