@@ -1,11 +1,5 @@
 const readline = require('readline-sync');
-
-let computerScore = 0;
-let userScore = 0;
-
-function prompt(message) {
-  console.log(`=> ${message}`);
-}
+const WINNING_SCORE = 5;
 
 const VALID_CHOICES = {
   r: 'rock',
@@ -14,6 +8,15 @@ const VALID_CHOICES = {
   l: 'lizard',
   sp: 'spock'
 };
+
+let numberOfValidChoices = Object.keys(VALID_CHOICES).length;
+let choicesValues = Object.values(VALID_CHOICES);
+let computerScore = 0;
+let userScore = 0;
+
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
 
 function displayGameHeading() {
   prompt("Welcome to Rock Paper Scissors Lizard Spock!");
@@ -29,6 +32,12 @@ function displayGameHeading() {
     Paper disproves Spock
     Spock vaporizes Rock
     Rock crushes Scissors\n`);
+}
+
+function displayMoveChoices() {
+  console.log('');
+  prompt("Choose one: \n");
+  Object.entries(VALID_CHOICES).forEach(([key, value]) => prompt(`${key}: ${value}`));
 }
 
 function isValidChoice(choice) {
@@ -81,23 +90,24 @@ function takeScore(outcome) {
 }
 
 function gameOver(playerScore, compScore) {
-  if (compScore === 5 || playerScore === 5) {
-    return true;
-  } else {
-    return false;
-  }
+  return compScore === WINNING_SCORE || playerScore === WINNING_SCORE;
+}
+
+function resetGame() {
+  userScore = 0;
+  computerScore = 0;
+  console.clear();
 }
 
 displayGameHeading();
 
 while (true) {
-  prompt("Choose one: \n");
-  Object.entries(VALID_CHOICES).forEach(([key, value]) => prompt(`${key}: ${value}`));
-  let choice = readline.question();
+  displayMoveChoices();
+  let choice = readline.question().toLowerCase();
 
   while (!isValidChoice(choice)) {
     prompt("That's not a valid choice");
-    choice = readline.question();
+    choice = readline.question().toLowerCase();
   }
 
   // converts choice value to correct format, string with the choice spelled out
@@ -105,9 +115,7 @@ while (true) {
     choice = VALID_CHOICES[choice];
   }
 
-  let numberOfValidChoices = Object.keys(VALID_CHOICES).length;
   let randomIndex = Math.floor(Math.random() * numberOfValidChoices);
-  let choicesValues = Object.values(VALID_CHOICES);
   let computerChoice = choicesValues[randomIndex];
 
   let results = calculateResults(choice, computerChoice);
@@ -117,10 +125,10 @@ while (true) {
   console.log(`\nYour score: ${userScore}`);
   console.log(`Computer score: ${computerScore}\n`);
 
-  if (userScore === 5) {
+  if (userScore === WINNING_SCORE) {
     prompt("Congratulations! YOU ARE THE CHAMPION!");
-  } else if (computerScore === 5) {
-    prompt("Computer has won!");
+  } else if (computerScore === WINNING_SCORE) {
+    prompt("Computer is the champion!");
   }
 
   prompt('Do you want to play again (y/n)?');
@@ -131,9 +139,7 @@ while (true) {
   }
 
   if (answer[0] === 'y' && gameOver(userScore, computerScore)) {
-    userScore = 0;
-    computerScore = 0;
-    console.clear();
+    resetGame();
   }
   if (answer[0] !== 'y') break;
 }
